@@ -29,15 +29,16 @@ function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   
   const [turn, setTurn] = useState(TURNS.X);
+
+  const [winner, setWinner] = useState(null )
   
   const handleUpdateBoard = (index) => {
-    if (!board[index]) {
-      const newBoard = [...board]
-      newBoard[index] = turn
-      setBoard(newBoard)
-      const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
-      setTurn(newTurn)
-    }
+    if (board[index]) return
+    const newBoard = [...board]
+    newBoard[index] = turn
+    setBoard(newBoard)
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
   }
   
   return (
