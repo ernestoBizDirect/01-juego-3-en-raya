@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './App.css'
 import {Square} from "./components/Square.jsx";
 import {TURNS} from "./constants.js";
@@ -31,9 +31,6 @@ function App() {
         setBoard(newBoard)
         const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
         setTurn(newTurn)
-        // Guardar aqui partida
-        window.localStorage.setItem('board', JSON.stringify(newBoard))
-        window.localStorage.setItem('turn', newTurn)
 
         // Revisar si hay un ganador
         const newWinner = checkWinner(newBoard)
@@ -52,6 +49,14 @@ function App() {
         window.localStorage.removeItem('board')
         window.localStorage.removeItem('turn')
     }
+
+    /// Si no se le especifican las depedencias se ejecuta siempre que se renderice el componente
+    // Las dependencias se ponen en un array
+    // Si se especifica como dependencia un array vacio se ejecuta una unica vez
+    useEffect(()=> {
+        // Como minimo se ejecuta una vez
+        console.log("Use Effect");
+    },[])
 
     return (
         <main className='board'>
